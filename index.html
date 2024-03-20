@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" manifest="index.manifest">
+
+<head>
+
+  <title>PicVector</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="picvector.css" rel="stylesheet">
+
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <script src="bower_components/imagetracerjs/imagetracer_v1.0.0.js"></script>
+  <script src="picvector.js"></script>
+
+</head>
+
+<body>
+
+  <canvas class="canvas"></canvas>
+
+  <h1><a href="https://github.com/ItsRoy69">PicVector</a></h1>
+
+  <p style="display:none;" class="spinner"><i class="fa fa-spinner fa-spin"></i></p>
+  <p class="instructions">Upload an image to create a vector file.</p>
+
+  <div style="display:none;" class="options">
+    <div class="form-inline">
+      <label>
+        Omit paths of length &lt;
+        <select class="form-control pathomit">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option selected=true>8</option>
+          <option>16</option>
+          <option>32</option>
+          <option>64</option>
+        </select>
+      </label>
+    </div>
+    <div class="form-inline">
+      <label>
+        Colors
+        <select class="form-control colors">
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>8</option>
+          <option selected=true>16</option>
+          <option>32</option>
+          <option>64</option>
+        </select>
+      </label>
+    </div>
+    <p><a class="btn btn-lg btn-inverse reload"><i class="fa fa-refresh"></i></a></p>
+  </div>
+
+  <div class="controls">
+    <span id="file-select" class="upload"><input type="file" /></span>
+    <a class="btn btn-lg btn-inverse upload"><i class="fa fa-upload"></i></a>
+    <a style="display:none;" title="picvector.svg" class="btn btn-lg btn-inverse save" target="_blank"><i
+        class="fa fa-save"></i></a>
+    <a style="display:none;" class="btn btn-lg btn-inverse btn-options"><i class="fa fa-cog"></i></a>
+  </div>
+
+  <script>
+    window.addEventListener('load', function (e) {
+      if (window.applicationCache) {
+        window.applicationCache.addEventListener('updateready', function (e) {
+          if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+            window.applicationCache.swapCache();
+            if (confirm('A new version of this site is available. Load it?')) {
+              window.location.reload();
+            }
+          } else {
+          }
+        }, false);
+      }
+    }, false);
+  </script>
+</body>
+
+</html>
