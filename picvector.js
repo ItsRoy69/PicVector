@@ -1,7 +1,5 @@
 jQuery(document).ready(function ($) {
-
   picvector = new PicVector();
-
 });
 
 Class = function (methods) {
@@ -14,7 +12,6 @@ Class = function (methods) {
   }
 
   if (!klass.prototype.initialize) klass.prototype.initialize = function () { };
-
   return klass;
 };
 
@@ -26,14 +23,12 @@ PicVector = Class({
   },
 
   initialize: function () {
-
     if (typeof window.FileReader == "undefined") {
       $('.instructions').html('You need a newer browser (Firefox 38+, Safari 7.1+, Chrome 31+) to use this service.');
       $('.upload').attr('disabled', true);
     }
 
     this.tracer = new ImageTracer();
-
     this.canvas = $('canvas.canvas')[0]
     this.context = this.canvas.getContext('2d');
     this.canvas.width = $(window).width();
@@ -42,23 +37,17 @@ PicVector = Class({
     var _picvector = this;
 
     $("#file-select input").change(function (e) {
-
       $('.spinner').show();
       $('.instructions').hide();
 
       var reader = new FileReader(),
         f = e.target.files[0];
-
       reader.onload = (function (file) {
 
         return function (e) {
-
           _picvector.img = new Image();
-
           _picvector.img.onload = function (e) {
-
-            var _img = this; 
-
+            var _img = this;
             _picvector.imgWidth = _img.width;
             _picvector.imgHeight = _img.height;
             _picvector.imgRatio = _img.height / _img.width;
@@ -70,30 +59,20 @@ PicVector = Class({
 
             _picvector.canvas.width = _picvector.imgWidth;
             _picvector.canvas.height = _picvector.imgHeight;
-
             _picvector.context.drawImage(_picvector.img, 0, 0, _picvector.canvas.width, _picvector.canvas.width * _picvector.imgRatio);
-
             _picvector.generate();
 
           };
           _picvector.img.src = e.target.result;
-
         };
-
       })(f);
-
       reader.readAsDataURL(f);
-
     });
 
     this.generate = function () {
-
       $('#svg').remove();
-
       var img = _picvector.tracer.getImgdata(_picvector.canvas);
-
       var svgstr = _picvector.tracer.imagedataToSVG(img, _picvector.options);
-
       _picvector.tracer.appendSVGString(svgstr, 'svg');
 
       $('.save').attr('href', "data:image/svg+xml;utf8," + $('#svg').html());
