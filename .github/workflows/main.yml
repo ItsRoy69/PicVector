@@ -1,4 +1,4 @@
-name: Install Bower
+name: Install Bower Dependencies
 
 on:
   push:
@@ -20,5 +20,9 @@ jobs:
 
       - name: Install Bower
         run: npm install -g bower
+
+      - name: Install Bower Dependencies
+        run: |
+          bower install
 
       # Additional steps for your build process
